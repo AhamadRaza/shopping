@@ -1,5 +1,7 @@
 package com.shopping.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +9,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "imageurl")
@@ -15,7 +17,8 @@ public class Category {
     @Column(name = "description")
     private String description;
     @Column(name = "active")
-    private Boolean active=true;
+    @JsonIgnore
+    private boolean active=true;
 
     public long getId() {
         return id;

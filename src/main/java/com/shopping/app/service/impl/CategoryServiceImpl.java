@@ -6,12 +6,15 @@ import com.shopping.app.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
-    @Autowired private CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     private static List<Category> categories = new ArrayList<>();
 
@@ -36,15 +39,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
     @Override
     public List<Category> list() {
-        return categories;
+        return categoryRepository.findAll();
     }
 
     @Override
     public Category byid(long id) {
-        for(Category category : categories){
-            if(category.getId()==id)
-                return category;
-        }
-        return null;
+        return categoryRepository.getOne(id);
     }
 }

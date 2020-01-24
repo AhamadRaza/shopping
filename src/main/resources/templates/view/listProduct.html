@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link th:href="@{assets/css/bootstrap.min.css}" type="text/css" rel="stylesheet">
     <link href="assets/css/bootstaps-readable-theme.css" rel="stylesheet">
+    <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
@@ -25,8 +26,8 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/about}">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/listProducts}">View Products</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/listProducts}">View Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/contact}">Contact</a>
@@ -41,7 +42,7 @@
             <div class="col-md-3">
                 <h1 class="my-4">Shop Name</h1>
                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                    <tr th:each="app,loop : ${category}">
+                    <tr th:each="app : ${category}">
                         <td><a th:href="@{/productbyid/}+${app.id}" class="list-group-item" th:text="${app.name}"></a></td>
                     </tr>
                 </table>
@@ -61,7 +62,24 @@
                             <li><a th:href="@{/home}">Home</a></li>
                             <li class="active" th:text="${categor.name}"></li>
                         </ol>
+                        </div>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="productListTable"  class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                            </tr>
+                            <tr th:if="${categor}" th:each="app : ${categor}">
+                                <td th:text="${app.id}"></td>
+                                <td th:text="${app.name}"></td>
+                            </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -79,6 +97,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="assets/jquery/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables.bootstrap.js"></script>
 </div>
 </body>
 </html>
